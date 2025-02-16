@@ -39,7 +39,6 @@ El proyecto está organizado en varios archivos y directorios:
 - **src/app.ts**: Configura el servidor Express, define las rutas y los controladores, y sirve los archivos estáticos.
   - `app.use(bodyParser.json())`: Configura el middleware para parsear JSON.
   - `app.use(cors())`: Habilita CORS para permitir solicitudes desde diferentes orígenes.
-  - `app.use(express.static(path.join(__dirname, '../public')))`: Sirve archivos estáticos desde el directorio `public`.
   - Define las rutas para agregar, eliminar, obtener, ordenar y buscar productos.
   - `app.listen(port, () => {...})`: Inicia el servidor en el puerto especificado.
 
