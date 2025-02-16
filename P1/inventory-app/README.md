@@ -1,6 +1,30 @@
+# PRACTICA 1
+
+| Nombre                       | Carnet    |
+| ---------------------------- | --------- |
+| Angel Francisco Sique Santos | 202012039 |
+
+___
+
 # Aplicación de Gestión de Inventario
 
 Este proyecto es una aplicación de gestión de inventario que permite a los usuarios gestionar productos en una tienda. La aplicación proporciona funcionalidades para agregar, eliminar y buscar productos, así como mostrar el inventario de varias maneras.
+
+## Índice
+1. [Objetivos](#objetivos)
+   - [Objetivos Generales](#objetivos-generales)
+   - [Objetivos Específicos](#objetivos-específicos)
+2. [Funcionalidades](#funcionalidades)
+3. [Estructura del Proyecto](#estructura-del-proyecto)
+   - [Descripción de los Archivos](#descripción-de-los-archivos)
+4. [Principios SOLID](#principios-solid)
+   - [S - Principio de Responsabilidad Única](#s---principio-de-responsabilidad-única-single-responsibility-principle)
+   - [O - Principio de Abierto/Cerrado](#o---principio-de-abierto-cerrado-openclosed-principle)
+   - [L - Principio de Sustitución de Liskov](#l---principio-de-sustitución-de-liskov-liskov-substitution-principle)
+   - [I - Principio de Segregación de Interfaces](#i---principio-de-segregación-de-interfaces-interface-segregation-principle)
+   - [D - Principio de Inversión de Dependencias](#d---principio-de-inversión-de-dependencias-dependency-inversion-principle)
+5. [Ejecución del Programa](#ejecución-del-programa)
+
 
 ## Objetivos
 
