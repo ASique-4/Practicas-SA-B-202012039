@@ -1,5 +1,5 @@
 export interface ProductInterface {
-    name: string;
-    quantity: number;
-    price: number;
+    name: string;       // Nombre del producto
+    quantity: number;   // Cantidad del producto en inventario
+    price: number;      // Precio del producto
 }
