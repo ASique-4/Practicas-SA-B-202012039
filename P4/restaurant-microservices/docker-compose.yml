@@ -17,6 +17,8 @@ services:
       - "5000:5000"
     depends_on:
       - mysql
+    env_file:
+      - ./reservation-service/.env
 
   payment-service:
     build: ./payment-service
@@ -24,6 +26,8 @@ services:
       - "5003:5003"
     depends_on:
       - mysql
+    env_file:
+      - ./payment-service/.env
 
   restaurant-info-service:
     build: ./restaurant-info-service
@@ -31,6 +35,8 @@ services:
       - "4000:4000"
     depends_on:
       - mysql
+    env_file:
+      - ./restaurant-info-service/.env
 
   customer-auth-service:
     build: ./customer-auth-service
@@ -38,6 +44,8 @@ services:
       - "4001:4001"
     depends_on:
       - mysql
+    env_file:
+      - ./customer-auth-service/.env
 
 volumes:
   mysql-data:
