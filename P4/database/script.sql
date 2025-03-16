@@ -31,3 +31,13 @@ CREATE TABLE customers (
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE restaurant_info (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    menu TEXT NOT NULL,
+    hours VARCHAR(255) NOT NULL
+);
+
+-- Insertar datos de ejemplo
+INSERT INTO restaurant_info (name, menu, hours) VALUES ('Restaurante Ejemplo', 'Plato 1,Plato 2', '9 AM - 9 PM');
