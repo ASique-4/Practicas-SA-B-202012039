@@ -1,11 +1,15 @@
 const { ApolloServer, gql } = require('apollo-server');
 const mysql = require('mysql');
+const dotenv = require('dotenv');
+
+// Cargar las variables de entorno desde el archivo .env
+dotenv.config();
 
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'restaurant_db'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
 
 const typeDefs = gql`
@@ -13,6 +17,10 @@ const typeDefs = gql`
     id: ID
     username: String
     token: String
+  }
+
+  type Query {
+    _: Boolean
   }
 
   type Mutation {
@@ -48,6 +56,6 @@ const resolvers = {
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-server.listen({ port: 4001 }).then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
+server.listen({ port: process.env.PORT }).then(({ url }) => {
+  console.log(`Server ready at ${url}`);
 });
