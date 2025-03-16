@@ -1,30 +1,39 @@
 from flask import Flask, request, jsonify
+import mysql.connector
 
 app = Flask(__name__)
 
-reservations = {}
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="password",
+    database="restaurant_db"
+)
 
 @app.route('/reservations', methods=['POST'])
 def create_reservation():
-    data = request.json
-    reservation_id = len(reservations) + 1
-    reservations[reservation_id] = data
-    return jsonify({"id": reservation_id, "reservation": data}), 201
+    data = request.get_json()
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO reservations (name, date, time, party_size) VALUES (%s, %s, %s, %s)",
+                   (data['name'], data['date'], data['time'], data['party_size']))
+    db.commit()
+    return jsonify({"message": "Reserva creada"}), 201
 
 @app.route('/reservations/<int:reservation_id>', methods=['PUT'])
-def update_reservation(reservation_id):
-    if reservation_id not in reservations:
-        return jsonify({"error": "Reservation not found"}), 404
-    data = request.json
-    reservations[reservation_id] = data
-    return jsonify({"id": reservation_id, "reservation": data})
+def modify_reservation(reservation_id):
+    data = request.get_json()
+    cursor = db.cursor()
+    cursor.execute("UPDATE reservations SET date=%s, time=%s, party_size=%s WHERE id=%s",
+                   (data['date'], data['time'], data['party_size'], reservation_id))
+    db.commit()
+    return jsonify({"message": "Reserva modificada"}), 200
 
 @app.route('/reservations/<int:reservation_id>', methods=['DELETE'])
 def cancel_reservation(reservation_id):
-    if reservation_id not in reservations:
-        return jsonify({"error": "Reservation not found"}), 404
-    del reservations[reservation_id]
-    return jsonify({"message": "Reservation cancelled"}), 204
+    cursor = db.cursor()
+    cursor.execute("DELETE FROM reservations WHERE id=%s", (reservation_id,))
+    db.commit()
+    return jsonify({"message": "Reserva cancelada"}), 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(port=5000)

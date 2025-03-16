@@ -1,12 +1,10 @@
 FROM node:14
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY package.json ./
+COPY package.json package.json
 RUN npm install
 
-COPY src/ ./
+COPY . .
 
-EXPOSE 4000
-
-CMD ["node", "index.js"]
+CMD ["node", "src/index.js"]

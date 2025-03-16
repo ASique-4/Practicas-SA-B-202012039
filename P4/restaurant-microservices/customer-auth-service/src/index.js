@@ -1,84 +1,53 @@
-const express = require('express');
-const { ApolloServer, gql } = require('apollo-server-express');
-const jwt = require('jsonwebtoken');
+const { ApolloServer, gql } = require('apollo-server');
+const mysql = require('mysql');
 
-const app = express();
-const PORT = process.env.PORT || 4000;
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'password',
+  database: 'restaurant_db'
+});
 
-// GraphQL schema
 const typeDefs = gql`
   type User {
-    id: ID!
-    username: String!
-    email: String!
-  }
-
-  type AuthPayload {
-    token: String!
-    user: User!
-  }
-
-  type Query {
-    me: User
+    id: ID
+    username: String
+    token: String
   }
 
   type Mutation {
-    register(username: String!, email: String!, password: String!): AuthPayload!
-    login(username: String!, password: String!): AuthPayload!
+    register(username: String!, password: String!): User
+    login(username: String!, password: String!): User
   }
 `;
 
-// Sample user data
-let users = [];
-
-// Resolvers
 const resolvers = {
-  Query: {
-    me: (parent, args, context) => {
-      if (!context.userId) throw new Error('Not authenticated');
-      return users.find(user => user.id === context.userId);
-    },
-  },
   Mutation: {
-    register: (parent, { username, email, password }) => {
-      const user = { id: users.length + 1, username, email, password };
-      users.push(user);
-      const token = jwt.sign({ userId: user.id }, 'your_secret_key');
-      return { token, user };
+    register: (_, { username, password }) => {
+      return new Promise((resolve, reject) => {
+        db.query("INSERT INTO customers (username, password) VALUES (?, ?)", [username, password], (err, result) => {
+          if (err) reject(err);
+          resolve({ id: result.insertId, username, token: "token123" });
+        });
+      });
     },
-    login: (parent, { username, password }) => {
-      const user = users.find(user => user.username === username && user.password === password);
-      if (!user) throw new Error('Invalid credentials');
-      const token = jwt.sign({ userId: user.id }, 'your_secret_key');
-      return { token, user };
-    },
-  },
-};
-
-// Middleware to authenticate user
-const getUser = (req) => {
-  const token = req.headers.authorization || '';
-  if (token) {
-    try {
-      return jwt.verify(token, 'your_secret_key');
-    } catch (err) {
-      throw new Error('Session invalid');
+    login: (_, { username, password }) => {
+      return new Promise((resolve, reject) => {
+        db.query("SELECT * FROM customers WHERE username = ? AND password = ?", [username, password], (err, results) => {
+          if (err) reject(err);
+          if (results.length > 0) {
+            resolve({ id: results[0].id, username, token: "token123" });
+          } else {
+            reject("Invalid credentials");
+          }
+        });
+      });
     }
   }
-  return null;
 };
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: ({ req }) => {
-    const user = getUser(req);
-    return { userId: user ? user.userId : null };
-  },
-});
+const server = new ApolloServer({ typeDefs, resolvers });
 
-server.applyMiddleware({ app });
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}${server.graphqlPath}`);
+server.listen({ port: 4001 }).then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`);
 });

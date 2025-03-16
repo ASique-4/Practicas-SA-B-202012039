@@ -1,38 +1,43 @@
 version: '3.8'
 
 services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: restaurant_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
   reservation-service:
-    build:
-      context: ./reservation-service
+    build: ./reservation-service
     ports:
       - "5000:5000"
-    networks:
-      - restaurant-network
+    depends_on:
+      - mysql
 
   payment-service:
-    build:
-      context: ./payment-service
+    build: ./payment-service
     ports:
-      - "5001:5000"
-    networks:
-      - restaurant-network
+      - "5003:5003"
+    depends_on:
+      - mysql
 
   restaurant-info-service:
-    build:
-      context: ./restaurant-info-service
+    build: ./restaurant-info-service
     ports:
-      - "5002:4000"
-    networks:
-      - restaurant-network
+      - "4000:4000"
+    depends_on:
+      - mysql
 
   customer-auth-service:
-    build:
-      context: ./customer-auth-service
+    build: ./customer-auth-service
     ports:
-      - "5003:4000"
-    networks:
-      - restaurant-network
+      - "4001:4001"
+    depends_on:
+      - mysql
 
-networks:
-  restaurant-network:
-    driver: bridge
+volumes:
+  mysql-data:
