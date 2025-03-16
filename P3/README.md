@@ -37,7 +37,6 @@
 
 # Descripción y Funcionalidad de Cada Microservicio
 
----
 
 ## 1. Sistema Financiero Externo  
 Este servicio representa un sistema externo que recibe las planillas aprobadas.

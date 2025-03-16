@@ -1,0 +1,20 @@
+{
+  "name": "customer-auth-service",
+  "version": "1.0.0",
+  "description": "Microservicio para el registro de clientes y gestión de autenticación.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "apollo-server": "^2.25.3",
+    "graphql": "^15.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "bcryptjs": "^2.4.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "author": "Tu Nombre",
+  "license": "MIT"
+}

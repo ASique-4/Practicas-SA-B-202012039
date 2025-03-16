@@ -1,0 +1,15 @@
+{
+  "name": "restaurant-info-service",
+  "version": "1.0.0",
+  "description": "Microservicio para obtener información sobre restaurantes, menús y horarios.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "apollo-server": "^2.25.3",
+    "graphql": "^15.5.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

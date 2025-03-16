@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  reservation-service:
+    build:
+      context: ./reservation-service
+    ports:
+      - "5000:5000"
+    networks:
+      - restaurant-network
+
+  payment-service:
+    build:
+      context: ./payment-service
+    ports:
+      - "5001:5000"
+    networks:
+      - restaurant-network
+
+  restaurant-info-service:
+    build:
+      context: ./restaurant-info-service
+    ports:
+      - "5002:4000"
+    networks:
+      - restaurant-network
+
+  customer-auth-service:
+    build:
+      context: ./customer-auth-service
+    ports:
+      - "5003:4000"
+    networks:
+      - restaurant-network
+
+networks:
+  restaurant-network:
+    driver: bridge
