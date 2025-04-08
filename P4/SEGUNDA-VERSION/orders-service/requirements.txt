@@ -1,0 +1,3 @@
+strawberry-graphql[flask]==0.215.2
+Flask==2.2.5
+SQLAlchemy==2.0.23
