@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway-service
+  namespace: sa-p5
+spec:
+  type: NodePort
+  selector:
+    app: gateway
+  ports:
+    - protocol: TCP
+      port: 80         # Puerto interno accesible dentro del cluster
+      targetPort: 5000 # Puerto en el contenedor (API Gateway)
+      nodePort: 30000  # Puerto expuesto en localhost 
