@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-gateway-ingress
+  namespace: sa-p5
+spec:
+  ingressClassName: "nginx"
+  rules:
+    - http:
+        paths:
+          - path: /users
+            pathType: Prefix
+            backend:
+              service:
+                name: users-service
+                port:
+                  number: 5001
+          - path: /products/graphql
+            pathType: Prefix
+            backend:
+              service:
+                name: products-service
+                port:
+                  number: 5002
+          - path: /orders/graphql
+            pathType: Prefix
+            backend:
+              service:
+                name: orders-service
+                port:
+                  number: 5003
+          - path: /inventory
+            pathType: Prefix
+            backend:
+              service:
+                name: inventory-service
+                port:
+                  number: 5004
