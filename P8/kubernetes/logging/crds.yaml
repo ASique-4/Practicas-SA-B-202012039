@@ -1,0 +1,2 @@
+# (se usa desde la fuente oficial vía kubectl, no se incluye contenido directo)
+# kubectl create -f https://download.elastic.co/downloads/eck/3.0.0/crds.yaml

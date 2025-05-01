@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: inventory-service-monitor
+  namespace: p8-logs
+  labels:
+    release: prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: inventory-service
+  namespaceSelector:
+    matchNames:
+      - p8-logs
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s

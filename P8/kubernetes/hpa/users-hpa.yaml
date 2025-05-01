@@ -2,7 +2,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: users-hpa
-  namespace: sa-p5
+  namespace: p8-logs
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: registro-cronjob
-  namespace: sa-p5
+  namespace: p8-logs
 spec:
   schedule: "*/2 * * * *"  # Cada 2 minutos
   jobTemplate:

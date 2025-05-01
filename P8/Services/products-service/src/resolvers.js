@@ -4,15 +4,14 @@ export const resolvers = {
   Query: {
     products: async () => {
       const db = await getDBConnection();
-      return db.all("SELECT * FROM products");
+      return db.prepare("SELECT * FROM products").all();
     }
   },
   Mutation: {
     addProduct: async (_, { name, price }) => {
       const db = await getDBConnection();
-      await db.run("INSERT INTO products (name, price) VALUES (?, ?)", [name, price]);
-      const product = await db.get("SELECT * FROM products WHERE name = ?", [name]);
-      return product;
+      db.prepare("INSERT INTO products (name, price) VALUES (?, ?)").run(name, price);
+      return db.prepare("SELECT * FROM products WHERE name = ?").get(name);
     }
   }
 };

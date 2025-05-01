@@ -2,12 +2,15 @@ apiVersion: v1
 kind: Service
 metadata:
   name: products-service
-  namespace: sa-p5
+  namespace: p8-logs
+  labels:
+    app: products-service
 spec:
   type: ClusterIP
   selector:
     app: products
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 5002
       targetPort: 5002

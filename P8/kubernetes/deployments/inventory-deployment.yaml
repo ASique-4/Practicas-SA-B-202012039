@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: inventory-deployment
-  namespace: sa-p5
+  namespace: p8-logs
   labels:
     app: inventory
 spec:
@@ -22,8 +22,9 @@ spec:
             - containerPort: 5004
           resources:
             requests:
+              memory: "32Mi"
+              cpu: "100m"
+            limits:
               memory: "64Mi"
               cpu: "250m"
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
+
