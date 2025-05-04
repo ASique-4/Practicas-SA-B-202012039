@@ -19,7 +19,7 @@ const Chatbot = () => {
     setMessages(prev => [...prev, userMessage]);
 
     try {
-      const res = await axios.post('http://localhost:5000/chatbot', {
+      const res = await axios.post('http://35.223.166.93/chatbot', {
         question: input,
         usuario_id: 1
       });

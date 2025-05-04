@@ -189,7 +189,9 @@ Se utilizó el paquete más económico ofrecido por OpenAI, con un costo de **5 
 ### Acceso:
 
 * Desde navegador: `http://localhost:3000`
-* Desde API Gateway: `http://localhost:5000/chatbot`
+* Desde API Gateway: `http://localhost:5010/chatbot`
+
+* Acceso publicado: `http://chatbot-p9-202012039.s3-website.us-east-2.amazonaws.com/`
 
 ### ¿Cómo interactuar?
 

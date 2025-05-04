@@ -36,3 +36,10 @@ spec:
                 name: inventory-service
                 port:
                   number: 5004
+          - path: /chatbot
+            pathType: Prefix
+            backend:
+              service:
+                name: chatbot-service
+                port:
+                  number: 5010
