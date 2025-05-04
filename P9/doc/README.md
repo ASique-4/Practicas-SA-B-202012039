@@ -210,9 +210,9 @@ El sistema responde de inmediato con la información solicitada o una respuesta 
 
 ## Diagrama de Arquitectura del Chatbot
 
-A continuación se muestra el diagrama actualizado del sistema, incluyendo la integración del chatbot y su interacción con el resto de microservicios:
+A continuación se muestra el diagrama del chatbot:
 
-![arquitectura](./arquitectura.png)
+![Diagrama-completo](image.png)
 
 **Descripción del flujo:**
 
