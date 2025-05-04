@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-service
+  namespace: p8-logs
+  labels:
+    app: products-service
+spec:
+  type: ClusterIP
+  selector:
+    app: products
+  ports:
+    - name: http
+      protocol: TCP
+      port: 5002
+      targetPort: 5002

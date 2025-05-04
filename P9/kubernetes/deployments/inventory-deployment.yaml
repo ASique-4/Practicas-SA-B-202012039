@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-deployment
+  namespace: p8-logs
+  labels:
+    app: inventory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory
+  template:
+    metadata:
+      labels:
+        app: inventory
+    spec:
+      containers:
+        - name: inventory
+          image: angelsique/inventory-service:latest
+          ports:
+            - containerPort: 5004
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "100m"
+            limits:
+              memory: "64Mi"
+              cpu: "250m"
+

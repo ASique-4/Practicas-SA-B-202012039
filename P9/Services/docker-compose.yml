@@ -1,0 +1,30 @@
+services:
+  api-gateway:
+    image: angelsique/api-gateway
+    ports:
+      - "5000:5000"
+    depends_on:
+      - users-service
+      - products-service
+      - orders-service
+      - inventory-service
+
+  users-service:
+    image: angelsique/users-service
+    ports:
+      - "5001:5001"
+
+  products-service:
+    image: angelsique/products-service
+    ports:
+      - "5002:5002"
+
+  orders-service:
+    image: angelsique/orders-service
+    ports:
+      - "5003:5003"
+
+  inventory-service:
+    image: angelsique/inventory-service
+    ports:
+      - "5004:5004"

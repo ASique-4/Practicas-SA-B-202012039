@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: registro-cronjob
+  namespace: p8-logs
+spec:
+  schedule: "*/2 * * * *"  # Cada 2 minutos
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: cron-registro
+              image: angelsique/cron-registro:latest
+              volumeMounts:
+                - name: data-volume
+                  mountPath: /registro
+          volumes:
+            - name: data-volume
+              emptyDir: {}  # Temporal, se borra al reiniciar el pod
+          restartPolicy: OnFailure
